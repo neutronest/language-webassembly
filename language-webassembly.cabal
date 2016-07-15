@@ -1,0 +1,22 @@
+name:                language-webassembly
+version:             0.0.1
+synopsis:            A Haskell port of the WebAssembly spec.
+homepage:            http://github.com/TerrorJack/language-webassembly
+license:             BSD3
+license-file:        LICENSE
+author:              Shao Cheng
+maintainer:          astrohavoc@gmail.com
+copyright:           2016 Shao Cheng
+category:            Language
+build-type:          Simple
+cabal-version:       >=1.22
+
+library
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  build-depends:       base
+  ghc-options:         -Wall
+
+source-repository head
+  type:     git
+  location: https://github.com/TerrorJack/language-webassembly 
