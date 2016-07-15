@@ -4,8 +4,5 @@ module Language.WebAssembly.Values (
 
 import Language.WebAssembly.Types
 
-data Op i32 i64 f32 f64
-    = Int32 !i32
-    | Int64 !i64
-    | Float32 !f32
-    | Float64 !f64
+data Op i f
+    = Int32 !i | Int64 !i | Float32 !f | Float64 !f
