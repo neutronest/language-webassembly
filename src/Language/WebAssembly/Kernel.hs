@@ -14,8 +14,14 @@ module Language.WebAssembly.Kernel (
   , TestOp
   , RelOp
   , CvtOp
+  , MemOp (..)
+  , ExtOp (..)
+  , WrapOp (..)
+  , HostOp (..)
 ) where
 
+import Language.WebAssembly.Memory
+import Language.WebAssembly.Types
 import Language.WebAssembly.Values
 
 data IntUnOp = Clz | Ctz | Popcnt
@@ -56,3 +62,24 @@ type BinOp = Op IntBinOp FloatBinOp
 type TestOp = Op IntTestOp FloatTestOp
 type RelOp = Op IntRelOp FloatRelOp
 type CvtOp = Op IntCvtOp FloatCvtOp
+
+data MemOp = MemOp {
+    ty :: !ValueType
+  , offset :: !Offset
+  , align :: !Int
+}
+
+data ExtOp = ExtOp {
+    extMemOp :: !MemOp
+  , extSz :: !MemSize
+  , ext :: !Extension
+}
+
+data WrapOp = WrapOp {
+    wrapMemOp :: !MemOp
+  , wrapSz :: !MemSize
+}
+
+data HostOp
+    = CurrentMemory
+    | GrowMemory
