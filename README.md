@@ -1,5 +1,7 @@
 # language-webassembly
 
+[![Build Status](https://travis-ci.org/TerrorJack/language-webassembly.svg?branch=genesis)](https://travis-ci.org/TerrorJack/language-webassembly)
+
 A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). Work in progress.
 
 ## Notable differences from the OCaml implementation
