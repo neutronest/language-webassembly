@@ -18,9 +18,9 @@ A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). W
     * Implement tests (with [hspec](https://www.stackage.org/package/hspec))
     * Implement S-expression parser (with [megaparsec](https://www.stackage.org/package/megaparsec))
 * Phase 2: implement missing utilities
-    * Binary encoder/decoder
-    * Pretty-printer
-    * REPL-mode of interpreter
+    * Binary encoder/decoder (with [scanner](https://www.stackage.org/package/scanner))
+    * Pretty-printer (with [ansi-wl-pprint](https://www.stackage.org/package/ansi-wl-pprint))
+    * REPL-mode of interpreter (with [haskeline](https://www.stackage.org/package/haskeline))
 * Phase 3: in case I really get here
     * More test suites, benchmark, documentation, etc
     * Call 3rd-party WebAssembly implementations (SpiderMonkey, V8, etc) for cross-testing
