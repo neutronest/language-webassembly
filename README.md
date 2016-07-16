@@ -5,7 +5,7 @@ A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). W
 ## Notable differences from the OCaml implementation
 
 * Name mangling: when several different OCaml modules share a common identifier, a prefix is added to that name for disambiguation. e.g. `IntAdd`/`FloatAdd`, `IntBinOp`/`FloatBinOp`
-* Annotating the AST: the OCaml implementation uses a `phrase` datatype to bind source code position to every AST node. Here, we use an `Annotation` datatype for similar purpose, but it's a polymorphic binder and can annotate the AST nodes with any other type.
+* Annotating the AST: the OCaml implementation uses a `phrase` datatype to bind source code position to every AST node. Here, we use an `Annotated` datatype for similar purpose, but it's a polymorphic binder and can annotate the AST nodes with any other type.
 * Whenever possible, `Vector`s replace lists.
 
 ## Todo
