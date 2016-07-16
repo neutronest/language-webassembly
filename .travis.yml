@@ -12,5 +12,7 @@ before_install:
   - chmod +x ~/.local/bin/stack
   - stack setup
 
+install: true
+
 script:
   - stack build --test --haddock --no-haddock-deps
