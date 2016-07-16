@@ -8,7 +8,7 @@ module Language.WebAssembly.Memory (
 ) where
 
 import Data.Int
-import qualified Data.Text as T
+import Data.Text
 
 type Address = Int64
 
@@ -22,5 +22,5 @@ data Extension = SX | ZX
 
 data Segment' = Segment' {
     addr :: !Address
-  , segmentData :: !T.Text
+  , segmentData :: !Text
 }

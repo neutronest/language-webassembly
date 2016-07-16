@@ -13,9 +13,9 @@ cabal-version:       >=1.22
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Language.WebAssembly.Kernel
+  exposed-modules:     Language.WebAssembly.Annotated
+                       Language.WebAssembly.Kernel
                        Language.WebAssembly.Memory
-                       Language.WebAssembly.Source
                        Language.WebAssembly.Types
                        Language.WebAssembly.Values
   default-language:    Haskell2010

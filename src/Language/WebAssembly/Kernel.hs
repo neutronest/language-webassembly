@@ -31,10 +31,10 @@ module Language.WebAssembly.Kernel (
   , Export' (..)
 ) where
 
-import qualified Data.Text as T
+import Data.Text
 import Data.Vector
+import Language.WebAssembly.Annotated
 import Language.WebAssembly.Memory
-import Language.WebAssembly.Source
 import Language.WebAssembly.Types
 import Language.WebAssembly.Values
 
@@ -98,54 +98,54 @@ data HostOp
     = CurrentMemory
     | GrowMemory
 
-type Var = Phrase Int
-type Literal = Phrase Value
-type Expr = Phrase Expr'
-type Func = Phrase Func'
-type Memory = Phrase Memory'
-type Segment = Phrase Segment'
-type Export = Phrase Export'
+type Var a = Annotated Int a
+type Literal a = Annotated Value a
+type Expr a = Annotated (Expr' a) a
+type Func a = Annotated (Func' a) a
+type Memory a = Annotated (Memory' a) a
+type Segment a = Annotated Segment' a
+type Export a = Annotated (Export' a) a
 
-data Expr'
+data Expr' a
     = Nop
     | Unreachable
-    | Block !(Vector Expr) !Expr
-    | Loop !Expr
-    | Break !Var !(Maybe Expr)
-    | BreakIf !Var !(Maybe Expr) !Expr
-    | BreakTable !(Vector Var) !Var !(Maybe Expr) !Expr
-    | If !Expr !Expr !Expr
-    | Select !Expr !Expr !Expr
-    | Call !Var !(Vector Expr)
-    | CallImport !Var !(Vector Expr)
-    | CallIndirect !Var !Expr !(Vector Expr)
-    | GetLocal !Var
-    | SetLocal !Var !Expr
-    | Load !MemOp !Expr
-    | Store !MemOp !Expr !Expr
-    | LoadExtend !ExtOp !Expr
-    | StoreWrap !WrapOp !Expr !Expr
-    | Const !Literal
-    | Unary !UnOp !Expr
-    | Binary !BinOp !Expr !Expr
-    | Test !TestOp !Expr
-    | Compare !RelOp !Expr !Expr
-    | Convert !CvtOp !Expr
-    | Host !HostOp !(Vector Expr)
+    | Block !(Vector (Expr a)) !(Expr a)
+    | Loop !(Expr a)
+    | Break !(Var a) !(Maybe (Expr a))
+    | BreakIf !(Var a) !(Maybe (Expr a)) !(Expr a)
+    | BreakTable !(Vector (Var a)) !(Var a) !(Maybe (Expr a)) !(Expr a)
+    | If !(Expr a) !(Expr a) !(Expr a)
+    | Select !(Expr a) !(Expr a) !(Expr a)
+    | Call !(Var a) !(Vector (Expr a))
+    | CallImport !(Var a) !(Vector (Expr a))
+    | CallIndirect !(Var a) !(Expr a) !(Vector (Expr a))
+    | GetLocal !(Var a)
+    | SetLocal !(Var a) !(Expr a)
+    | Load !MemOp !(Expr a)
+    | Store !MemOp !(Expr a) !(Expr a)
+    | LoadExtend !ExtOp !(Expr a)
+    | StoreWrap !WrapOp !(Expr a) !(Expr a)
+    | Const !(Literal a)
+    | Unary !UnOp !(Expr a)
+    | Binary !BinOp !(Expr a) !(Expr a)
+    | Test !TestOp !(Expr a)
+    | Compare !RelOp !(Expr a) !(Expr a)
+    | Convert !CvtOp !(Expr a)
+    | Host !HostOp !(Vector (Expr a))
 
-data Func' = Func' {
-    ftype :: !Var
+data Func' a = Func' {
+    ftype :: !(Var a)
   , locals :: !(Vector ValueType)
-  , body :: !Expr
+  , body :: !(Expr a)
 }
 
-data Memory' = Memory' {
+data Memory' a = Memory' {
     min :: !Size
   , max :: !Size
-  , segments :: !(Vector Segment)
+  , segments :: !(Vector (Segment a))
 }
 
-data Export' = Export' {
-    name :: !T.Text
+data Export' a = Export' {
+    name :: !Text
   , kind :: !() -- todo
 }
