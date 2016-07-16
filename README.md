@@ -15,8 +15,8 @@ A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). W
 * Phase 1: port the WebAssembly AST/kernel AST
     * Modeling in Haskell
     * Implement checker/desugarer/interpreter
-    * Implement tests
-    * Implement S-expression parser
+    * Implement tests (with [hspec](https://www.stackage.org/package/hspec))
+    * Implement S-expression parser (with [megaparsec](https://www.stackage.org/package/megaparsec))
 * Phase 2: implement missing utilities
     * Binary encoder/decoder
     * Pretty-printer
