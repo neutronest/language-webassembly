@@ -1,20 +1,58 @@
-language: haskell
+language: c
 
 cache:
   directories:
     - $HOME/.stack/
     - $TRAVIS_BUILD_DIR/.stack-work/
 
-env:
-  - RESOLVER=lts-2
-  - RESOLVER=lts-3
-  - RESOLVER=lts-6
-  - RESOLVER=nightly
+matrix:
+  include:
+    - env: RESOLVER=lts-2
+      compiler: "stack/lts-2/ghc-7.8.4/linux"
+      addons: {apt: {packages: [libgmp-dev]}}
+      os: linux
+
+    - env: RESOLVER=lts-3
+      compiler: "stack/lts-3/ghc-7.10.2/linux"
+      addons: {apt: {packages: [libgmp-dev]}}
+      os: linux
+
+    - env: RESOLVER=lts-6
+      compiler: "stack/lts-6/ghc-7.10.3/linux"
+      addons: {apt: {packages: [libgmp-dev]}}
+      os: linux
+
+    - env: RESOLVER=nightly
+      compiler: "stack/nightly/ghc-8.0.1/linux"
+      addons: {apt: {packages: [libgmp-dev]}}
+      os: linux
+
+    - env: RESOLVER=lts-2
+      compiler: "stack/lts-2/ghc-7.8.4/osx"
+      os: osx
+
+    - env: RESOLVER=lts-3
+      compiler: "stack/lts-3/ghc-7.8.4/osx"
+      os: osx
+
+    - env: RESOLVER=lts-6
+      compiler: "stack/lts-6/ghc-7.8.4/osx"
+      os: osx
+
+    - env: RESOLVER=nightly
+      compiler: "stack/nightly/ghc-8.0.1/osx"
+      os: osx
 
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
-  - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - |
+    if [ `uname` = "Darwin" ]
+    then
+      travis_retry curl -L https://www.stackage.org/stack/osx-x86_64 | tar xz --strip-components=1 --include '*/stack' -C ~/.local/bin
+    else
+      travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+    fi
   - chmod +x ~/.local/bin/stack
   - stack setup --stack-yaml stack-$RESOLVER.yaml
 
