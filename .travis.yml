@@ -11,10 +11,6 @@ env:
   - RESOLVER=lts-6
   - RESOLVER=nightly
 
-os:
-  - linux
-  - osx
-
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
