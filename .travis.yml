@@ -5,14 +5,24 @@ cache:
     - $HOME/.stack/
     - $TRAVIS_BUILD_DIR/.stack-work/
 
+env:
+  - RESOLVER=lts-2
+  - RESOLVER=lts-3
+  - RESOLVER=lts-6
+  - RESOLVER=nightly
+
+os:
+  - linux
+  - osx
+
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
   - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
   - chmod +x ~/.local/bin/stack
-  - stack setup
+  - stack setup --stack-yaml stack-$RESOLVER.yaml
 
 install: true
 
 script:
-  - stack build --test --haddock --no-haddock-deps
+  - stack build --stack-yaml stack-$RESOLVER.yaml --haddock --no-haddock-deps --test
