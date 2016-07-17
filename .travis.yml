@@ -44,6 +44,7 @@ matrix:
       os: osx
 
 before_install:
+  - unset CC
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
   - |
