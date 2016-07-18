@@ -7,44 +7,36 @@ cache:
 
 matrix:
   include:
-    - env: RESOLVER=lts-2
-      compiler: "stack/lts-2/ghc-7.8.4/linux"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: RESOLVER=lts-2 GHCVER=7.8.4
+      addons: {apt: {packages: [ghc-7.8.4], sources: [hvr-ghc]}}
       os: linux
 
-    - env: RESOLVER=lts-3
-      compiler: "stack/lts-3/ghc-7.10.2/linux"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: RESOLVER=lts-3 GHCVER=7.10.2
+      addons: {apt: {packages: [ghc-7.10.2], sources: [hvr-ghc]}}
       os: linux
 
-    - env: RESOLVER=lts-6
-      compiler: "stack/lts-6/ghc-7.10.3/linux"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: RESOLVER=lts-6 GHCVER=7.10.3
+      addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
       os: linux
 
-    - env: RESOLVER=nightly
-      compiler: "stack/nightly/ghc-8.0.1/linux"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: RESOLVER=nightly GHCVER=8.0.1
+      addons: {apt: {packages: [ghc-8.0.1], sources: [hvr-ghc]}}
       os: linux
 
     - env: RESOLVER=lts-2
-      compiler: "stack/lts-2/ghc-7.8.4/osx"
       os: osx
 
     - env: RESOLVER=lts-3
-      compiler: "stack/lts-3/ghc-7.10.2/osx"
       os: osx
 
     - env: RESOLVER=lts-6
-      compiler: "stack/lts-6/ghc-7.10.3/osx"
       os: osx
 
     - env: RESOLVER=nightly
-      compiler: "stack/nightly/ghc-8.0.1/osx"
       os: osx
 
 before_install:
-  - unset CC
+  - export PATH=/opt/ghc/$GHCVER/bin:$PATH
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
   - |
