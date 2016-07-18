@@ -1,0 +1,19 @@
+name: language-webassembly
+version: 0.0.0
+synopsis: A Haskell port of the WebAssembly spec.
+category: Language
+stability: alpha
+author: Shao Cheng <astrohavoc@gmail.com>
+copyright: (c) 2016 Shao Cheng
+license: BSD3
+github: TerrorJack/language-webassembly
+
+ghc-options: -Wall
+
+dependencies:
+  - base
+  - text
+  - vector
+
+library:
+  source-dirs: src
