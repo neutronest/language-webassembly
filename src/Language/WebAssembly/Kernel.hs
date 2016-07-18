@@ -29,6 +29,10 @@ module Language.WebAssembly.Kernel (
   , Segment
   , Export
   , Export' (..)
+  , Import
+  , Import' (..)
+  , Module
+  , Module' (..)
 ) where
 
 import Data.Text
@@ -105,6 +109,8 @@ type Func a = Annotated (Func' a) a
 type Memory a = Annotated (Memory' a) a
 type Segment a = Annotated Segment' a
 type Export a = Annotated (Export' a) a
+type Import a = Annotated (Import' a) a
+type Module a = Annotated (Module' a) a
 
 data Expr' a
     = Nop
@@ -146,6 +152,22 @@ data Memory' a = Memory' {
 }
 
 data Export' a = Export' {
-    name :: !Text
+    exportName :: !Text
   , kind :: !() -- todo
+}
+
+data Import' a = Import' {
+    itype :: !(Var a)
+  , moduleName :: !Text
+  , funcName :: !Text
+}
+
+data Module' a = Module' {
+    memory :: !(Maybe (Memory a))
+  , types :: !(Vector FuncType)
+  , funcs :: !(Vector (Func a))
+  , start :: !(Maybe (Var a))
+  , imports :: !(Vector (Import a))
+  , exports :: !(Vector (Export a))
+  , table :: !(Vector (Var a))
 }

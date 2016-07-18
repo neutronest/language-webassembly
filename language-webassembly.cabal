@@ -14,6 +14,7 @@ cabal-version:       >=1.18
 library
   hs-source-dirs:      src
   exposed-modules:     Language.WebAssembly.Annotated
+                       Language.WebAssembly.AST
                        Language.WebAssembly.Kernel
                        Language.WebAssembly.Memory
                        Language.WebAssembly.Types
