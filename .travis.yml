@@ -7,32 +7,44 @@ cache:
 
 matrix:
   include:
-    - env: RESOLVER=lts-2 GHCVER=7.8.4
-      addons: {apt: {packages: [ghc-7.8.4], sources: [hvr-ghc]}}
-      os: linux
-
-    - env: RESOLVER=lts-3 GHCVER=7.10.2
-      addons: {apt: {packages: [ghc-7.10.2], sources: [hvr-ghc]}}
-      os: linux
-
-    - env: RESOLVER=lts-6 GHCVER=7.10.3
-      addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
-      os: linux
-
-    - env: RESOLVER=nightly GHCVER=8.0.1
+    - env: RESOLVER=nightly GHCVER=8.0.1 ARCH=x86_64
       addons: {apt: {packages: [ghc-8.0.1], sources: [hvr-ghc]}}
       os: linux
 
-    - env: RESOLVER=lts-2
+    - env: RESOLVER=lts-6 GHCVER=7.10.3 ARCH=x86_64
+      addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
+      os: linux
+
+    - env: RESOLVER=lts-3 GHCVER=7.10.2 ARCH=x86_64
+      addons: {apt: {packages: [ghc-7.10.2], sources: [hvr-ghc]}}
+      os: linux
+
+    - env: RESOLVER=lts-2 GHCVER=7.8.4 ARCH=x86_64
+      addons: {apt: {packages: [ghc-7.8.4], sources: [hvr-ghc]}}
+      os: linux
+
+    - env: RESOLVER=nightly ARCH=x86_64
       os: osx
 
-    - env: RESOLVER=lts-3
+    - env: RESOLVER=lts-6 ARCH=x86_64
       os: osx
 
-    - env: RESOLVER=lts-6
+    - env: RESOLVER=lts-3 ARCH=x86_64
       os: osx
 
-    - env: RESOLVER=nightly
+    - env: RESOLVER=lts-2 ARCH=x86_64
+      os: osx
+
+    - env: RESOLVER=nightly ARCH=i386
+      os: osx
+
+    - env: RESOLVER=lts-6 ARCH=i386
+      os: osx
+
+    - env: RESOLVER=lts-3 ARCH=i386
+      os: osx
+
+    - env: RESOLVER=lts-2 ARCH=i386
       os: osx
 
 before_install:
@@ -47,9 +59,9 @@ before_install:
       travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
     fi
   - chmod +x ~/.local/bin/stack
-  - stack setup --stack-yaml stack-$RESOLVER.yaml
+  - stack setup --arch $ARCH --stack-yaml stack-$RESOLVER.yaml
 
 install: true
 
 script:
-  - stack build --stack-yaml stack-$RESOLVER.yaml --haddock --no-haddock-deps --test
+  - stack build --arch $ARCH --stack-yaml stack-$RESOLVER.yaml --haddock --no-haddock-deps --test
