@@ -1,9 +1,15 @@
 module Language.WebAssembly.Values (
     Op (..)
   , Value
+  , Func
 ) where
 
-data Op i f
-    = Int32 !i | Int64 !i | Float32 !f | Float64 !f
+import Data.Int
+import Data.Vector
 
-data Value -- todo
+data Op i32 i64 f32 f64
+    = Int32 !i32 | Int64 !i64 | Float32 !f32 | Float64 !f64
+
+type Value = Op Int32 Int64 Float Double
+
+type Func = Vector Value -> Maybe Value

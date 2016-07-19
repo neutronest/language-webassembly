@@ -40,7 +40,7 @@ import Data.Vector
 import Language.WebAssembly.Annotated
 import Language.WebAssembly.Memory
 import Language.WebAssembly.Types
-import Language.WebAssembly.Values
+import Language.WebAssembly.Values hiding (Func)
 
 data IntUnOp = Clz | Ctz | Popcnt
 
@@ -75,11 +75,11 @@ data FloatCvtOp
     | PromoteFloat32 | DemoteFloat64
     | ReinterpretInt
 
-type UnOp = Op IntUnOp FloatUnOp
-type BinOp = Op IntBinOp FloatBinOp
-type TestOp = Op IntTestOp FloatTestOp
-type RelOp = Op IntRelOp FloatRelOp
-type CvtOp = Op IntCvtOp FloatCvtOp
+type UnOp = Op IntUnOp IntUnOp FloatUnOp FloatUnOp
+type BinOp = Op IntBinOp IntBinOp FloatBinOp FloatBinOp
+type TestOp = Op IntTestOp IntTestOp FloatTestOp FloatTestOp
+type RelOp = Op IntRelOp IntRelOp FloatRelOp FloatRelOp
+type CvtOp = Op IntCvtOp IntCvtOp FloatCvtOp FloatCvtOp
 
 data MemOp = MemOp {
     ty :: !ValueType
