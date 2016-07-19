@@ -6,7 +6,7 @@ A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). W
 
 ## Notable differences from the OCaml implementation
 
-* Name mangling: when several different OCaml modules share a common identifier, a prefix is added to that name for disambiguation. e.g. `IntAdd`/`FloatAdd`, `IntBinOp`/`FloatBinOp`
+* Name convention: when several different OCaml modules share a common identifier, a prefix is added to that name for disambiguation. e.g. `IntAdd`/`FloatAdd`, `IntBinOp`/`FloatBinOp`. Also, `underscore_case`s are turned to `camelCase`s.
 * Annotating the AST: the OCaml implementation uses a `phrase` datatype to bind source code position to every AST node. Here, I use an `Annotated` datatype for similar purpose, but it's a polymorphic binder and can annotate the AST nodes with any other type. For more on this topic, check out [this blog post](http://blog.ezyang.com/2013/05/the-ast-typing-problem/). I'm choosing the low-tech approach (compared to fixpoint functors, etc) here, since it already works well.
 * Whenever possible, `Vector`s replace lists.
 
@@ -18,7 +18,7 @@ A Haskell port of the WebAssembly [spec](https://github.com/WebAssembly/spec). W
     * Implement tests (with [hspec](https://www.stackage.org/package/hspec))
     * Implement S-expression parser (with [megaparsec](https://www.stackage.org/package/megaparsec))
 * Phase 2: implement missing utilities
-    * Binary encoder/decoder (with [scanner](https://www.stackage.org/package/scanner))
+    * Binary encoder/decoder (with [store](https://www.stackage.org/package/store))
     * Pretty-printer (with [ansi-wl-pprint](https://www.stackage.org/package/ansi-wl-pprint))
     * REPL-mode of interpreter (with [haskeline](https://www.stackage.org/package/haskeline))
 * Phase 3: in case I really get here
