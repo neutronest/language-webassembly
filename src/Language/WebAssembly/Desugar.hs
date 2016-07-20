@@ -15,20 +15,20 @@ desugarExprs = undefined -- todo
 
 desugarFunc :: AST.Func a -> Kernel.Func a
 desugarFunc = desugarAnnotated $ \f -> Kernel.Func' {
-    ftype = AST.ftype f
-  , locals = AST.locals f
-  , body = desugarExprs $ AST.body f
+    Kernel.ftype = AST.ftype f
+  , Kernel.locals = AST.locals f
+  , Kernel.body = desugarExprs $ AST.body f
 }
 
 desugarModule :: AST.Module a -> Kernel.Module a
 desugarModule = desugarAnnotated $ \m -> Kernel.Module' {
-    memory = AST.memory m
-  , types = AST.types m
-  , funcs = desugarFunc <$> AST.funcs m
-  , start = AST.start m
-  , imports = AST.imports m
-  , exports = AST.exports m
-  , table = AST.table m
+    Kernel.memory = AST.memory m
+  , Kernel.types = AST.types m
+  , Kernel.funcs = desugarFunc <$> AST.funcs m
+  , Kernel.start = AST.start m
+  , Kernel.imports = AST.imports m
+  , Kernel.exports = AST.exports m
+  , Kernel.table = AST.table m
 }
 
 desugar :: AST.Module a -> Kernel.Module a
