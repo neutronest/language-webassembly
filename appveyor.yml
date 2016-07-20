@@ -39,4 +39,9 @@ before_build:
 build: off
 
 build_script:
-  - stack build --arch %ARCH% --stack-yaml stack-%RESOLVER%.yaml --haddock --no-haddock-deps --test
+  - stack build --arch %ARCH% --stack-yaml stack-%RESOLVER%.yaml --haddock --no-haddock-deps
+
+test: off
+
+test_script:
+  - stack test --arch %ARCH% --stack-yaml stack-%RESOLVER%.yaml
