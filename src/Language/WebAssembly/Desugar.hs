@@ -2,6 +2,7 @@ module Language.WebAssembly.Desugar (
     desugar
 ) where
 
+import Data.Functor ((<$>))
 import Data.Vector
 import Language.WebAssembly.Annotated
 import qualified Language.WebAssembly.AST as AST
