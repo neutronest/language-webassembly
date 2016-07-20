@@ -3,7 +3,7 @@ version: 0.0.0
 synopsis: A Haskell port of the WebAssembly spec.
 category: Language
 stability: alpha
-author: Shao Cheng <astrohavoc@gmail.com>
+maintainer: Shao Cheng <astrohavoc@gmail.com>
 copyright: (c) 2016 Shao Cheng
 license: BSD3
 github: TerrorJack/language-webassembly
@@ -11,7 +11,7 @@ github: TerrorJack/language-webassembly
 ghc-options: -Wall
 
 dependencies:
-  - base
+  - base >= 4.7 && < 4.10
   - text
   - vector
 
